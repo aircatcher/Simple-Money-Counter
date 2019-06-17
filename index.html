@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <input type="number" placeholder="Input amount of money ..." />
-    <script src="assets/script.js"></script>
+    <form id="money" method="POST">
+        <label><b>Enter Amount</b></label>
+        <input type="text" name="message" id="amount-input">
+        <input type="submit"><br/>
+    </form>
+    
+    <label>Your input: </label>
+    <p><span id='result'></span></p>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
