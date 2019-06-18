@@ -22,7 +22,7 @@ class App extends Component
   varInit()
   {
     this.amount = document.getElementById('amount-input').value;
-    this.hundredThousandth = Math.floor( (this.amount % 1000000) / 100000 );
+    this.hundredThousandth = (this.amount - (this.amount % 100000)) / 100000;
     this.tenThousandth     = Math.floor( (this.amount % 100000) / 50000 );
     this.remTenThousandth  = Math.floor( (this.amount % 100000) / 10000 );
     this.thousandth        = Math.floor( (this.amount % 10000) / 5000 );
@@ -95,12 +95,13 @@ class App extends Component
     else if(this.remTenth === 5 || this.remTenth <= 0)
       this.remTenth = 0;
 
-    if(Math.floor((this.amount % 100) > 50))
-      this.remTenth = 'left Rp' + Math.floor( (this.amount % 100) - 50 );
-    else if(Math.floor((this.amount % 100) === 50))
+    const am = this.amount % 100;
+    if(Math.floor(am) > 50)
+      this.remTenth = 'left Rp' + Math.floor((am) - 50);
+    else if(Math.floor(am) === 50)
       this.remTenth = 0;
     else
-      this.remTenth = 'left Rp' + Math.floor( (this.amount % 100) );
+      this.remTenth = 'left Rp' + Math.floor(am);
   }
 
   handleForm(event)
