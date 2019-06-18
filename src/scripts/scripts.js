@@ -98,10 +98,11 @@ class App extends Component
     const am = this.amount % 100;
     if(Math.floor(am) > 50)
       this.remTenth = 'left Rp' + Math.floor((am) - 50);
-    else if(Math.floor(am) === 50)
+    else if(Math.floor(am) === 50 || Math.floor(am) === 0)
       this.remTenth = 0;
-    else
+    else if(Math.floor(am) > 0 && Math.floor(am) < 50)
       this.remTenth = 'left Rp' + Math.floor(am);
+
   }
 
   handleForm(event)
@@ -256,14 +257,14 @@ class App extends Component
     return (
       <div className="App">
         <div className="main-container">
-          <form id="money" method="POST" onChange={this.handleForm}>
+          <form id="money" method="POST" onChange={this.handleForm} onSubmit={this.handleForm}>
             {/* <div className="svgContainer">
               {this.svgYeti()}
             </div> */}
             <label><b>Enter Amount</b></label>
             <div className="inputGroup inputGroup1">
               {/* <input type="email" id="loginEmail" maxLength="254" /> */}
-              <input type="number" name="message" id="amount-input" />
+              <input type="text" name="message" id="amount-input" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" />
               <p className="helper helper1">Input amount of money ...</p>
             </div>
           </form>
