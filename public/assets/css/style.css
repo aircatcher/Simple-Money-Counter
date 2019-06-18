@@ -8,6 +8,7 @@
 }
 body
 {
+  margin: 0 auto;
   background-color: gray
 }
 input[type=number]::-webkit-inner-spin-button,
