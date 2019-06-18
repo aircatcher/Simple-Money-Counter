@@ -10,8 +10,9 @@ body {
 	font-size: 16px; font-family: 'Source Sans Pro', sans-serif; font-weight: 400;
 	-webkit-font-smoothing: antialiased;
 }
-form {
-	position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+form,
+#res-container {
+	position: absolute;
 	display: block; width: 100%; max-width: 400px; background-color: #FFF;
 	margin: 0; padding: 2.25em; box-sizing: border-box; border: solid 1px #DDD; border-radius: .5em;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -85,4 +86,16 @@ form {
 			transform: translate(1em, 1.55em) scale(.6); opacity: 1;
 		}
 	}
+}
+.main-container {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	width: 100%
+}
+form { transform: translate(-50%,-50%) }
+#res-container {
+	transform: translateX(-50%);
+	top: 125px;
+	left: 0px
 }

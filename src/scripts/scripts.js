@@ -14,6 +14,95 @@ class App extends Component
     this.svgYeti    = this.svgYeti.bind(this);
   }
 
+  /**
+   * Variable assignments.
+   * Catch the value of the amount and
+   * count the decimal place values
+   */
+  varInit()
+  {
+    this.amount = document.getElementById('amount-input').value;
+    this.hundredThousandth = Math.floor( (this.amount % 1000000) / 100000 );
+    this.tenThousandth     = Math.floor( (this.amount % 100000) / 50000 );
+    this.remTenThousandth  = Math.floor( (this.amount % 100000) / 10000 );
+    this.thousandth        = Math.floor( (this.amount % 10000) / 5000 );
+    this.remThousandth     = Math.floor( (this.amount % 10000) / 1000 );
+    this.hundredth         = Math.floor( (this.amount % 1000) / 500 );
+    this.remHundredth      = Math.floor( (this.amount % 1000) / 100 );
+    this.tenth             = Math.floor( (this.amount % 100) / 50 );
+    this.remTenth          = 0;
+    this.single            = Math.floor( (this.amount % 10) );
+  }
+
+  /**
+   * How many needed for ten thousandth amount.
+   * Available fractions are 50K, 20K, and 10K
+   */
+  remainderA()
+  {
+    if(this.remTenThousandth === 9 || this.remTenThousandth === 4)
+      this.remTenThousandth = '2x Rp20000';
+    else if(this.remTenThousandth === 8 || this.remTenThousandth === 3)
+      this.remTenThousandth = '1x Rp20000 <br/> 1x Rp10000';
+    else if(this.remTenThousandth === 7 || this.remTenThousandth === 2)
+      this.remTenThousandth = '1x Rp20000';
+    else if(this.remTenThousandth === 6 || this.remTenThousandth === 1)
+      this.remTenThousandth = '1x Rp10000';
+    else if(this.remTenThousandth === 5 || this.remTenThousandth <= 0)
+      this.remTenThousandth = 0;
+  }
+
+  /**
+   * How many needed for thousandth amount.
+   * Available fractions are 5K, 2K, and 1K
+   */
+  remainderB()
+  {
+    if(this.remThousandth === 9 || this.remThousandth === 4)
+      this.remThousandth = '2x Rp2000';
+    else if(this.remThousandth === 8 || this.remThousandth === 3)
+      this.remThousandth = '1x Rp2000 <br/> 1x Rp1000';
+    else if(this.remThousandth === 7 || this.remThousandth === 2)
+      this.remThousandth = '1x Rp2000';
+    else if(this.remThousandth === 6 || this.remThousandth === 1)
+      this.remThousandth = '1x Rp1000';
+    else if(this.remThousandth === 5 || this.remThousandth <= 0)
+      this.remThousandth = 0;
+  }
+
+  /**
+   * How many needed hundredth amount.
+   * Available fractions are 500, 200, and 100
+   */
+  remainderC()
+  {
+    if(this.remHundredth === 9 || this.remHundredth === 4)
+      this.remHundredth = '2x Rp200';
+    else if(this.remHundredth === 8 || this.remHundredth === 3)
+      this.remHundredth = '1x Rp200 <br/> 1x Rp100';
+    else if(this.remHundredth === 7 || this.remHundredth === 2)
+      this.remHundredth = '1x Rp200';
+    else if(this.remHundredth === 6 || this.remHundredth === 1)
+      this.remHundredth = '1x Rp100';
+    else if(this.remHundredth === 5 || this.remHundredth <= 0)
+      this.remHundredth = 0;
+  }
+
+  remainderD()
+  {
+    if((this.remTenth >= 6 && this.remTenth <= 9) || (this.remTenth >= 1 && this.remTenth <= 4))
+      this.remTenth = 'left Rp' + (this.remTenth * 10 + this.single);
+    else if(this.remTenth === 5 || this.remTenth <= 0)
+      this.remTenth = 0;
+
+    if(Math.floor((this.amount % 100) > 50))
+      this.remTenth = 'left Rp' + Math.floor( (this.amount % 100) - 50 );
+    else if(Math.floor((this.amount % 100) === 50))
+      this.remTenth = 0;
+    else
+      this.remTenth = 'left Rp' + Math.floor( (this.amount % 100) );
+  }
+
   handleForm(event)
   {
     /**
@@ -21,112 +110,41 @@ class App extends Component
      */
     event.preventDefault();
 
-    /**
-     * Variable assignments.
-     * Catch the value of the amount and
-     * count the decimal place values
-     */
-    let amount = document.getElementById('amount-input').value;
-    let hundredThousandth = Math.floor( (amount % 1000000) / 100000 );
-    let tenThousandth     = Math.floor( (amount % 100000) / 50000 );
-    let remTenThousandth  = Math.floor( (amount % 100000) / 10000 );
-    let thousandth        = Math.floor( (amount % 10000) / 5000 );
-    let remThousandth     = Math.floor( (amount % 10000) / 1000 );
-    let hundredth         = Math.floor( (amount % 1000) / 500 );
-    let remHundredth      = Math.floor( (amount % 1000) / 100 );
-    let tenth             = Math.floor( (amount % 100) / 50 );
-    let remTenth          = 0;
-    let single            = Math.floor( (amount % 10) );
-
-
-
-    /**
-     * How many needed for ten thousandth amount.
-     * Available fractions are 50K, 20K, and 10K
-     */
-    if(remTenThousandth === 9 || remTenThousandth === 4)
-        remTenThousandth = '2x Rp20000';
-    else if(remTenThousandth === 8 || remTenThousandth === 3)
-        remTenThousandth = '1x Rp20000 <br/> 1x Rp10000';
-    else if(remTenThousandth === 7 || remTenThousandth === 2)
-        remTenThousandth = '1x Rp20000';
-    else if(remTenThousandth === 6 || remTenThousandth === 1)
-        remTenThousandth = '1x Rp10000';
-    else if(remTenThousandth === 5 || remTenThousandth <= 0)
-        remTenThousandth = 0;
-
-    /**
-     * How many needed for thousandth amount.
-     * Available fractions are 5K, 2K, and 1K
-     */
-    if(remThousandth === 9 || remThousandth === 4)
-        remThousandth = '2x Rp2000';
-    else if(remThousandth === 8 || remThousandth === 3)
-        remThousandth = '1x Rp2000 <br/> 1x Rp1000';
-    else if(remThousandth === 7 || remThousandth === 2)
-        remThousandth = '1x Rp2000';
-    else if(remThousandth === 6 || remThousandth === 1)
-        remThousandth = '1x Rp1000';
-    else if(remThousandth === 5 || remThousandth <= 0)
-        remThousandth = 0;
-
-    /**
-     * How many needed hundredth amount.
-     * Available fractions are 500, 200, and 100
-     */
-    if(remHundredth === 9 || remHundredth === 4)
-        remHundredth = '2x Rp200';
-    else if(remHundredth === 8 || remHundredth === 3)
-        remHundredth = '1x Rp200 <br/> 1x Rp100';
-    else if(remHundredth === 7 || remHundredth === 2)
-        remHundredth = '1x Rp200';
-    else if(remHundredth === 6 || remHundredth === 1)
-        remHundredth = '1x Rp100';
-    else if(remHundredth === 5 || remHundredth <= 0)
-        remHundredth = 0;
-        
-    if((remTenth >= 6 && remTenth <= 9) || (remTenth >= 1 && remTenth <= 4))
-        remTenth = 'left Rp' + (remTenth * 10 + single);
-    else if(remTenth === 5 || remTenth <= 0)
-        remTenth = 0;
-
-
-    if(Math.floor((amount % 100) > 50))
-        remTenth = 'left Rp' + Math.floor( (amount % 100) - 50 );
-    else if(Math.floor((amount % 100) === 50))
-        remTenth = 0;
-    else
-        remTenth = 'left Rp' + Math.floor( (amount % 100) );
+    this.varInit();
+    this.remainderA();
+    this.remainderB();
+    this.remainderC();
+    this.remainderD();
     
-    let a = hundredThousandth + 'x Rp100000';
-    let b = tenThousandth + 'x Rp50000';
-    let rb = remTenThousandth;
-    let c = thousandth + 'x Rp5000';
-    let rc = remThousandth;
-    let d = hundredth + 'x Rp500';
-    let rd = remHundredth;
-    let e = tenth + 'x Rp50';
-    let ed = remTenth;
+    this.a = this.hundredThousandth + 'x Rp100000';
+    this.b = this.tenThousandth + 'x Rp50000';
+    this.rb = this.remTenThousandth;
+    this.c = this.thousandth + 'x Rp5000';
+    this.rc = this.remThousandth;
+    this.d = this.hundredth + 'x Rp500';
+    this.rd = this.remHundredth;
+    this.e = this.tenth + 'x Rp50';
+    this.ed = this.remTenth;
 
-    let result =
-        ((hundredThousandth !== 0) ? a + '<br/>' : '') +
-        ((tenThousandth !== 0) ? b + '<br/>' : '') +
-        ((remTenThousandth !== 0) ? rb + '<br/>' : '') +
-        ((thousandth !== 0) ? c + '<br/>' : '') +
-        ((remThousandth !== 0) ? rc + '<br/>' : '') +
-        ((hundredth !== 0) ? d + '<br/>' : '') +
-        ((remHundredth !== 0) ? rd + '<br/>' : '') +
-        ((tenth !== 0) ? e + '<br/>' : '') +
-        ((remTenth !== 0) ? ed : '');
+    this.result =
+        ((this.hundredThousandth !== 0) ? this.a + '<br/>' : '') +
+        ((this.tenThousandth !== 0) ? this.b + '<br/>' : '') +
+        ((this.remTenThousandth !== 0) ? this.rb + '<br/>' : '') +
+        ((this.thousandth !== 0) ? this.c + '<br/>' : '') +
+        ((this.remThousandth !== 0) ? this.rc + '<br/>' : '') +
+        ((this.hundredth !== 0) ? this.d + '<br/>' : '') +
+        ((this.remHundredth !== 0) ? this.rd + '<br/>' : '') +
+        ((this.tenth !== 0) ? this.e + '<br/>' : '') +
+        ((this.remTenth !== 0) ? this.ed : '');
 
     /**
      * Catch the result and assign the value
      * to the paragraph with id = result on the frontend.
      */
-    document.getElementById('result').innerHTML = result;
+    document.getElementById('result').innerHTML = this.result;
 
-    let form = document.getElementById('money');
-    form.addEventListener("submit", this.handleSubmit, true);
+    this.form = document.getElementById('money');
+    this.form.addEventListener("submit", this.handleSubmit, true);
   }
 
   svgYeti()
@@ -236,20 +254,23 @@ class App extends Component
   {
     return (
       <div className="App">
-        <form id="money" method="POST" onChange={this.handleForm}>
-          {/* <div className="svgContainer">
-            {this.svgYeti()}
-          </div> */}
-          <label><b>Enter Amount</b></label>
-          <div className="inputGroup inputGroup1">
-            {/* <input type="email" id="loginEmail" maxLength="254" /> */}
-            <input type="number" name="message" id="amount-input" />
-            <p className="helper helper1">Input amount of money ...</p>
+        <div className="main-container">
+          <form id="money" method="POST" onChange={this.handleForm}>
+            {/* <div className="svgContainer">
+              {this.svgYeti()}
+            </div> */}
+            <label><b>Enter Amount</b></label>
+            <div className="inputGroup inputGroup1">
+              {/* <input type="email" id="loginEmail" maxLength="254" /> */}
+              <input type="number" name="message" id="amount-input" />
+              <p className="helper helper1">Input amount of money ...</p>
+            </div>
+          </form>
+          <div id='res-container'>
+            <label htmlFor="result">Result: </label>
+            <span id='result'></span>
           </div>
-        </form>
-        
-        <label>Your input: </label>
-        <p><span id='result'></span></p>
+        </div>
       </div>
     );
   }
