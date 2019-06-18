@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import '../styles/yeti.scss'
-import '../styles/styles.css';
+import '../styles/styles.scss'
 
 class App extends Component
 {
@@ -10,8 +9,24 @@ class App extends Component
     super(props);
     this.state = {value: ''};
 
+    this.inputFocus = this.inputFocus.bind(this);
     this.handleForm = this.handleForm.bind(this);
     this.svgYeti    = this.svgYeti.bind(this);
+
+  }
+
+  inputFocus()
+  {
+    const elm = document.getElementsByClassName('helper')[0]
+    elm.style.transform = 'translate(1em, 2.2em) scale(0.6)';
+    elm.style.transformOrigin = '-17% -650%';
+  }
+
+  inputFocusOut()
+  {
+    const elm = document.getElementsByClassName('helper')[0]
+    elm.style.transform = 'translate(8%, -20%) scale(1)';
+    elm.style.transformOrigin = '19% 0';
   }
 
   /**
@@ -129,15 +144,15 @@ class App extends Component
     this.ed = this.remTenth;
 
     this.result =
-        ((this.hundredThousandth !== 0) ? this.a + '<br/>' : '') +
-        ((this.tenThousandth !== 0) ? this.b + '<br/>' : '') +
-        ((this.remTenThousandth !== 0) ? this.rb + '<br/>' : '') +
-        ((this.thousandth !== 0) ? this.c + '<br/>' : '') +
-        ((this.remThousandth !== 0) ? this.rc + '<br/>' : '') +
-        ((this.hundredth !== 0) ? this.d + '<br/>' : '') +
-        ((this.remHundredth !== 0) ? this.rd + '<br/>' : '') +
-        ((this.tenth !== 0) ? this.e + '<br/>' : '') +
-        ((this.remTenth !== 0) ? this.ed : '');
+      ((this.hundredThousandth !== 0) ? this.a + '<br/>' : '') +
+      ((this.tenThousandth !== 0) ? this.b + '<br/>' : '') +
+      ((this.remTenThousandth !== 0) ? this.rb + '<br/>' : '') +
+      ((this.thousandth !== 0) ? this.c + '<br/>' : '') +
+      ((this.remThousandth !== 0) ? this.rc + '<br/>' : '') +
+      ((this.hundredth !== 0) ? this.d + '<br/>' : '') +
+      ((this.remHundredth !== 0) ? this.rd + '<br/>' : '') +
+      ((this.tenth !== 0) ? this.e + '<br/>' : '') +
+      ((this.remTenth !== 0) ? this.ed : '');
 
     /**
      * Catch the result and assign the value
@@ -264,13 +279,16 @@ class App extends Component
             <label><b>Enter Amount</b></label>
             <div className="inputGroup inputGroup1">
               {/* <input type="email" id="loginEmail" maxLength="254" /> */}
-              <input type="text" name="message" id="amount-input" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" />
+              <input type="text" name="message" id="amount-input" onFocus={this.inputFocus} onBlur={this.inputFocusOut} /> {/* onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')" */}
               <p className="helper helper1">Input amount of money ...</p>
             </div>
           </form>
           <div id='res-container'>
             <label htmlFor="result">Result: </label>
             <span id='result'></span>
+          </div>
+          <div className="copyright">
+            Made by <a href="https://ferickandrew.com">Ferick Andrew</a> with <a href="http://reactjs.org">React</a>
           </div>
         </div>
       </div>
