@@ -242,7 +242,6 @@ class App extends Component
           </div> */}
           <label><b>Enter Amount</b></label>
           <div className="inputGroup inputGroup1">
-            <label htmlFor="loginEmail" id="loginEmailLabel">Email</label>
             {/* <input type="email" id="loginEmail" maxLength="254" /> */}
             <input type="number" name="message" id="amount-input" />
             <p className="helper helper1">Input amount of money ...</p>
