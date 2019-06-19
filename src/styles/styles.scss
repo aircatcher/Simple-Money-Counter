@@ -146,7 +146,7 @@ form,
 		{
 			top: 0; left: 0;
 			transform: translate(8%, -20%) scale(1);
-			transform-origin: 19% 0px;
+			transform-origin: 0 0;
 			color: $darkBlue;
 			font-size: 1.55em;
 			font-weight: 400;
@@ -154,10 +154,11 @@ form,
 			pointer-events: none;
 			transition: transform .2s ease-out, opacity .2s linear
 		}
-		&.focusWithText .helper
-		{
-			transform: translate(1em, 1.55em) scale(.6); opacity: 1
-		}
+		// &.focusWithText .helper
+		// {
+		// 	transform: translate(1em, -0.8em) scale(0.6);
+		// 	opacity: 1
+		// }
 	}
 }
 .main-container

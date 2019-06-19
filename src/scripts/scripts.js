@@ -19,8 +19,7 @@ class App extends Component
   inputFocus()
   {
     const elm = document.getElementsByClassName('helper')[0];
-    elm.style.transform = 'translate(1em, 2.2em) scale(0.6)';
-    elm.style.transformOrigin = '-17% -650%';
+    elm.style.transform = 'translate(1em, -0.8em) scale(0.6)';
   }
 
   inputFocusOut()
@@ -30,7 +29,6 @@ class App extends Component
     if(input.value === null || input.value === '')
     {
       helper.style.transform = 'translate(8%, -20%) scale(1)';
-      helper.style.transformOrigin = '19% 0';
     }
   }
 
