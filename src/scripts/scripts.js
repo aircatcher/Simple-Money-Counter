@@ -10,6 +10,8 @@ class App extends Component
     this.state = {value: ''};
 
     this.inputFocus = this.inputFocus.bind(this);
+    this.inputFocusOut = this.inputFocusOut.bind(this);
+    this.inputChange = this.inputChange.bind(this);
     this.handleForm = this.handleForm.bind(this);
     this.svgYeti    = this.svgYeti.bind(this);
 
@@ -17,16 +19,29 @@ class App extends Component
 
   inputFocus()
   {
-    const elm = document.getElementsByClassName('helper')[0]
+    const elm = document.getElementsByClassName('helper')[0];
     elm.style.transform = 'translate(1em, 2.2em) scale(0.6)';
     elm.style.transformOrigin = '-17% -650%';
   }
 
   inputFocusOut()
   {
-    const elm = document.getElementsByClassName('helper')[0]
-    elm.style.transform = 'translate(8%, -20%) scale(1)';
-    elm.style.transformOrigin = '19% 0';
+    const input = document.getElementById('amount-input');
+    const helper = document.getElementsByClassName('helper')[0];
+    if(input.value === null || input.value === '')
+    {
+      helper.style.transform = 'translate(8%, -20%) scale(1)';
+      helper.style.transformOrigin = '19% 0';
+    }
+  }
+
+  inputChange()
+  {
+    const input = document.getElementById('amount-input');
+    if(input.value !== null || input.value !== '')
+      this.inputFocus();
+    else
+      this.inputFocusOut();
   }
 
   /**
@@ -279,7 +294,7 @@ class App extends Component
             <label><b>Enter Amount</b></label>
             <div className="inputGroup inputGroup1">
               {/* <input type="email" id="loginEmail" maxLength="254" /> */}
-              <input type="text" name="message" id="amount-input" onFocus={this.inputFocus} onBlur={this.inputFocusOut} /> {/* onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')" */}
+              <input type="text" name="message" id="amount-input" onFocus={this.inputFocus} onBlur={this.inputFocusOut} onChange={this.inputChange} /> {/* onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')" */}
               <p className="helper helper1">Input amount of money ...</p>
             </div>
           </form>
