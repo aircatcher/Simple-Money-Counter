@@ -39,6 +39,18 @@ class App extends Component
       this.inputFocus();
     else
       this.inputFocusOut();
+    
+    let idr = input.value.split('Rp');
+    if(idr[1] === undefined)
+      input.value = input.value.split('Rp').join('').split(' ').join('').split(',').join('');
+    else
+    {
+      if(!input.value.indexOf('Rp') && idr[1] !== '')
+        input.value = input.value.split('Rp').join('').split(' ').join('').split(',').join('');
+    }
+    input.value = input.value.match(/.{1,3}/g);
+    if(input.value.indexOf('Rp ') === -1)
+      input.value = 'Rp ' + input.value.split(' ,').pop();
   }
 
   /**
@@ -49,6 +61,7 @@ class App extends Component
   varInit()
   {
     this.amount = document.getElementById('amount-input').value;
+    this.amount = this.amount.split('Rp').join('').split(' ').join('').split(',').join('');
     this.hundredThousandth = (this.amount - (this.amount % 100000)) / 100000;
     this.tenThousandth     = Math.floor( (this.amount % 100000) / 50000 );
     this.remTenThousandth  = Math.floor( (this.amount % 100000) / 10000 );
