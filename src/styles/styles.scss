@@ -182,5 +182,11 @@ form { transform: translate(-50%,-50%) }
 .copyright
 {
 	position: absolute;
-	top: 470px
+	top: 470px;
+	margin-bottom: 50px
+}
+@media (max-width: 411px)
+{
+	.main-container { width: 80% }
+	.helper1 { font-size: 1.2em !important }
 }

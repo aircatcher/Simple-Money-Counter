@@ -14,7 +14,6 @@ class App extends Component
     this.inputChange = this.inputChange.bind(this);
     this.handleForm = this.handleForm.bind(this);
     this.svgYeti    = this.svgYeti.bind(this);
-
   }
 
   inputFocus()
@@ -169,6 +168,9 @@ class App extends Component
       ((this.tenth !== 0) ? this.e + '<br/>' : '') +
       ((this.remTenth !== 0) ? this.ed : '');
 
+    if(this.result === null || this.result === '')
+      this.result = 'Please input the amount ...';
+
     /**
      * Catch the result and assign the value
      * to the paragraph with id = result on the frontend.
@@ -300,10 +302,10 @@ class App extends Component
           </form>
           <div id='res-container'>
             <label htmlFor="result">Result: </label>
-            <span id='result'></span>
+            <span id='result'>Please input the amount ...</span>
           </div>
           <div className="copyright">
-            Made by <a href="https://ferickandrew.com">Ferick Andrew</a> with <a href="http://reactjs.org">React</a>
+            Made by <a href="https://ferickandrew.com" target="_blank" rel="noopener noreferrer">Ferick Andrew</a> with <a href="http://reactjs.org" target="_blank" rel="noopener noreferrer">React</a>
           </div>
         </div>
       </div>
