@@ -181,6 +181,8 @@ class App extends Component
 
     if(this.result === null || this.result === '')
       this.result = 'Please input the amount ...';
+    if(this.result.indexOf('NaN') !== -1)
+      this.result = 'You have error(s) on your input, please check it again';
 
     /**
      * Catch the result and assign the value
