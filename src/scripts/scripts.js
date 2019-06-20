@@ -11,6 +11,7 @@ class App extends Component
 
     this.inputFocus = this.inputFocus.bind(this);
     this.inputFocusOut = this.inputFocusOut.bind(this);
+    this.inputValidation = this.inputValidation.bind(this);
     this.handleForm = this.handleForm.bind(this);
   }
 
@@ -131,15 +132,15 @@ class App extends Component
       this.amount = this.amount.split('.').join('');
   }
 
-  inpuValidation()
+  inputValidation()
   {
     if(this.result === null || this.result === '')
       this.result = 'Please input the amount ...';
     if(this.amount.indexOf(',') !== -1)
       this.result = 'Invalid separator "comma", please check it again';
   
-    if(document.getElementById('amount-input').split('Rp')[1] === '' ||
-       document.getElementById('amount-input').split('Rp')[1] === ' ')
+    if(document.getElementById('amount-input').value.split('Rp')[1] === '' ||
+       document.getElementById('amount-input').value.split('Rp')[1] === ' ')
       this.result = 'Missing value of the amount, please check it again';
     else
       this.amount = this.amount.split('Rp').join('Rp ');
@@ -190,7 +191,7 @@ class App extends Component
       ((this.tenth !== 0) ? this.e + '<br/>' : '') +
       ((this.remTenth !== 0) ? this.ed : '');
 
-    
+    this.inputValidation();
 
     // if(this.result.indexOf('NaN') !== -1)
     //   this.result = 'You have error(s) on your input, please check it again';
@@ -219,7 +220,7 @@ class App extends Component
               {/* <input type="email" id="loginEmail" maxLength="254" /> */}
               <input type="text" name="message" id="amount-input" onFocus={this.inputFocus} onBlur={this.inputFocusOut} /> {/* onKeyUp="this.value=this.value.replace(/[^0-9.]/g,'')" */}
               <p className="helper helper1">Input amount of money ...</p>
-              <button type='submit' id='submit'>Submit</button>
+              <button type='submit' id='submit' style={{cursor:'pointer'}}>Submit</button>
             </div>
           </form>
           <div id='res-container'>
