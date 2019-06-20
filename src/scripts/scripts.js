@@ -22,8 +22,9 @@ class App extends Component
 
   inputFocusOut()
   {
+    const input = document.getElementById('amount-input').value;
     const helper = document.getElementsByClassName('helper')[0];
-    if(this.amount === null || this.amount === '')
+    if(input === null || input === '')
     {
       helper.style.transform = 'translate(8%, -20%) scale(1)';
     }
