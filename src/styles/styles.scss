@@ -193,6 +193,8 @@ form { transform: translate(-50%,-50%) }
 	top: 470px;
 	margin-bottom: 50px
 }
+button:hover { background-color: rgb(108, 197, 226) !important }
+button:focus { background-color: rgb(30, 124, 156) !important }
 @media (max-width: 420px)
 {
 	.main-container { width: 90% }
